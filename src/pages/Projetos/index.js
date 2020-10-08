@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import api from '../../services/api';
 import { useIsFocused} from "@react-navigation/native";
 import {
@@ -9,17 +9,20 @@ import {
   TaskText,
   TaskAction,
   ProjetoList,
-  AddTask,
-  AddTaskText,
+  IconActions,
+  IconActionsProject,
+  Roll
 } from "./styles";
 
 import Accordion from "../../components/Accordion";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import ProjetoModal from '../../components/ModalAddProjeto';
 import TarefaModal from '../../components/ModalAddTarefa';
+import { useAuth } from '../../hooks/auth';
 
 const Projetos = () => {
   const isFocused = useIsFocused();
+  const { user } = useAuth();
 
   const [projetos, setProjetos] = useState([]);
   const [tarefas, setTarefas] = useState([]);
@@ -52,17 +55,23 @@ const Projetos = () => {
   }, [isFocused || false]);
  
   return (
-    <ScrollView>
+    <Roll>
     <Container>
       <Title>Projetos</Title>
-
-      <ProjetoModal setProjetos={setProjetos}/>
+      {user.admim ? (
+        <ProjetoModal setProjetos={setProjetos}/>
+      ):(
+        null
+      )}
       
       <ProjetoList>
         {projetos.map((projeto) => (
-
             <Accordion title={projeto.descricao} key={projeto.id}>
+            {user.admim ? (
               <TarefaModal setTarefas={setTarefas} idProjeto={projeto.id}/>
+            ):(
+              null
+            )}
               {tarefas.map((tarefa) =>
                 tarefa.projetoId === projeto.id ? (
                   
@@ -72,54 +81,61 @@ const Projetos = () => {
                       <TaskAction>
                       {tarefa.concluido ? (
                         <>
-                            <MaterialCommunityIcons
-                              name="check-circle-outline"
-                              color="#3a3a3a"
-                              size={24}
+                          <IconActions
+                            name="check-circle-outline"
+                            color="#3a3a3a"
+                            size={24}
+                          />
+                          {user.admim ? (
+                            <IconActions
+                            name="delete-outline"
+                            color="#3a3a3a"
+                            size={24}
+                            style={{marginLeft:10}}
+                            onPress={() => removerTarefa(tarefa.id)}
                             />
-                            <MaterialCommunityIcons
-                              name="delete-outline"
-                              color="#3a3a3a"
-                              size={24}
-                              style={{marginLeft:10}}
-                              onPress={() => removerTarefa(tarefa.id)}
-                            />
-                            </>
-                          ) : (
-                            <>
-                            <MaterialCommunityIcons
-                              name="circle-outline"
-                              color="#3a3a3a"
-                              size={24}
-                            />
-                            <MaterialCommunityIcons
-                              name="delete-outline"
-                              color="#3a3a3a"
-                              size={24}
-                              style={{marginLeft:10}}
-                              onPress={() => removerTarefa(tarefa.id)}
-                            />
-                            </>
+                          ) : (  
+                            null
                           )}
-                      
+                          </>
+                          ) : (
+                          <>
+                            <IconActions
+                              name="circle-outline"
+                              size={24}
+                            />
+                            {user.admim ? (
+                              <IconActions
+                              name="delete-outline"
+                              size={24}
+                              style={{marginLeft:10}}
+                              onPress={() => removerTarefa(tarefa.id)}
+                              />
+                            ) : (  
+                               null
+                            )}
+                          </>
+                          )}
                       </TaskAction>
                     </Task>
                   </View>
                 ) : null
               )}
-                <MaterialCommunityIcons
+                {user.admim ? (
+                  <IconActionsProject
                   name="delete-forever"
-                  color="#0071b0"
                   size={32}
                   style={{alignSelf:"flex-end"}}
                   onPress={() => removerProjeto(projeto.id)}
-                />
+                  />
+                ) : (
+                  null
+                )}
             </Accordion>
-          
         ))}
       </ProjetoList>
     </Container>
-    </ScrollView>
+    </Roll>
   );
 };
 export default Projetos;

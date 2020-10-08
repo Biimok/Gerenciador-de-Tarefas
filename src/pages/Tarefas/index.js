@@ -4,24 +4,26 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 import Accordion from "../../components/Accordion";
-import Modal from "../../components/ModalBoasVindas";
-import { View, ScrollView } from "react-native";
+import ModalBoasVindas from "../../components/ModalBoasVindas";
+import ModalConfig from "../../components/ModalConfig";
+import { View } from "react-native";
 
 import {
   Container,
   Title,
-  Button,
-  ButtonText,
   Task,
   TaskText,
   TaskAction,
   ErroMessage,
   ProjetoList,
+  Header,
+  Roll,
+  IconActions
 } from "./styles";
 
 const Tarefas = () => {
   const isFocused = useIsFocused();
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
 
   const [projetos, setProjetos] = useState([]);
   const [tarefas, setTarefas] = useState([]);
@@ -75,15 +77,17 @@ const Tarefas = () => {
 
   return (
     <>
-      <ScrollView>
-        <Modal tarefas={tarefas}/>
+      <Roll>
+        
+        <ModalBoasVindas tarefas={tarefas}/>
+        
         <Container>
-          <Title>{`${user.nome}, suas Tarefas`}</Title>
-
-          <Button onPress={signOut}>
-            <ButtonText>Sair</ButtonText>
-          </Button>
-
+          <View style={{flexDirection:"row"}}>
+            <Header>
+              <Title>{`${user.nome}, suas Tarefas`}</Title>
+            </Header>
+            <ModalConfig/>
+          </View>
           {!!errorMessage && <ErroMessage>{errorMessage}</ErroMessage>}
 
           <ProjetoList>
@@ -97,16 +101,14 @@ const Tarefas = () => {
 
                         <TaskAction>
                           {tarefa.concluido ? (
-                            <MaterialCommunityIcons
+                            <IconActions
                               name="check-circle-outline"
-                              color="#3a3a3a"
                               size={22}
                               onPress={() => attTarefa(tarefa)}
                             />
                           ) : (
-                            <MaterialCommunityIcons
+                            <IconActions
                               name="circle-outline"
-                              color="#3a3a3a"
                               size={22}
                               onPress={() => attTarefa(tarefa)}
                             />
@@ -120,7 +122,7 @@ const Tarefas = () => {
             ))}
           </ProjetoList>
         </Container>
-      </ScrollView>
+      </Roll>
     </>
   );
 };

@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { View, LayoutAnimation, Platform, UIManager} from "react-native";
-import Icon from '@expo/vector-icons/MaterialIcons';
+
 import {
     Seta,
     Title,
     Parent,
-    Desc
+    Desc,
+    Icone
 } from './styles';
 const Accordion = ( props ) => {
     // const [data, setData] = useState(props.data);
     const [expanded, setExpanded] = useState(false);
+    
 
     useEffect( () => {
       if (Platform.OS === 'android') {
@@ -26,7 +28,7 @@ const Accordion = ( props ) => {
        <View>
             <Seta onPress={()=>toggleExpand()}>
                 <Title>{props.title}</Title>
-                <Icon name={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color="#5E5E5E" />
+                <Icone name={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} />
             </Seta>
             <Parent/>
             {

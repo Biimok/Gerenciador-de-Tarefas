@@ -61,7 +61,7 @@ const ProjetoModal = ({setProjetos}) => {
   return (
     <View>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <Wrap style={{ backgroundColor: "#F0F0F5" }}>
+        <Wrap>
         <TextModal>Entre com o nome do projeto</TextModal>
           
           <Input

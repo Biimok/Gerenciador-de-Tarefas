@@ -60,8 +60,6 @@ const TarefaModal = ({setTarefas, idProjeto}) => {
       return;
     }
 
-    
-
     const params = {
       descricao: novaTarefa,
       usuarioId: listaUsuarios[0].id,
@@ -84,7 +82,7 @@ const TarefaModal = ({setTarefas, idProjeto}) => {
   return (
     <View>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <Wrap style={{ backgroundColor: "#F0F0F5" }}>
+        <Wrap>
         <TextModal>Entre com o nome da Tarefa</TextModal>
           
           <Input

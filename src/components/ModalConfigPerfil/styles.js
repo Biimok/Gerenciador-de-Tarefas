@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+
+
+
 export const Wrap = styled.View`
     flex:1;
     background-color: ${props => props.theme.background};
@@ -10,15 +13,16 @@ export const Wrap = styled.View`
 
 export const TextButton = styled.Text`
     font-size: 18px;
-    color: ${props => props.theme.buttonText};
+    color: white;
     font-weight: bold;
     text-align: center;
+    color: ${props => props.theme.buttonText};
 
 `;
 export const TextModal = styled.Text`
-    color: ${props => props.theme.text};
     font-size: 26px;
     text-align: center;
+    color: ${props => props.theme.text};
 `;  
 
 export const TouchableHighlight = styled.TouchableHighlight`
@@ -30,11 +34,14 @@ export const TouchableHighlight = styled.TouchableHighlight`
 `;
 
 export const CreateButton = styled.TouchableHighlight`
-    background-color: ${props => props.theme.button};
-    border-radius: 5px;
-    padding: 10px;
-    min-width:100px;
-    margin: 0px 0 20px 0px;
+  min-width: 100px;
+  height: 40px;
+  margin: 20px;
+  padding:15px;
+  background-color: ${props => props.theme.button};
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Input = styled.TextInput`

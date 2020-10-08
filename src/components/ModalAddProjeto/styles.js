@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrap = styled.View`
     flex:1;
-    background-color: white;
+    background-color: ${props => props.theme.background};
     padding: 35px;
     justify-content: center;
     align-items: center;
@@ -10,18 +10,19 @@ export const Wrap = styled.View`
 
 export const TextButton = styled.Text`
     font-size: 18px;
-    color: white;
+    color: ${props => props.theme.buttonText};
     font-weight: bold;
     text-align: center;
 
 `;
 export const TextModal = styled.Text`
+    color: ${props => props.theme.text};
     font-size: 26px;
     text-align: center;
 `;  
 
 export const TouchableHighlight = styled.TouchableHighlight`
-    background-color: #0071b0;
+    background-color: ${props => props.theme.button};
     border-radius: 5px;
     padding: 10px;
     min-width:100px;
@@ -30,7 +31,7 @@ export const TouchableHighlight = styled.TouchableHighlight`
 
 export const Input = styled.TextInput`
   height: 50px;
-  background-color: #fff;
+  background-color: ${props => props.theme.input};
   padding: 0 20px;
   border-radius: 5px;
   margin: 20px 0 10px 0;

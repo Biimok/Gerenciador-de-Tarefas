@@ -7,19 +7,19 @@ export const Container = styled.View`
   background-color:${props => props.theme.background};
 `;
 
-export const Input = styled.TextInput`
-  width: 290px;
-  height: 40px;
-  margin-top: 15px;
-  background-color: ${props => props.theme.input};
-  padding: 0 20px;
+export const TextContainer = styled.View`
   border-radius: 5px;
 `;
 
+export const Actions = styled.View`
+  flex-direction:row;
+`;
+
 export const Button = styled.TouchableOpacity`
-  width: 290px;
+  min-width: 100px;
   height: 40px;
-  margin-top: 15px;
+  margin: 20px;
+  padding:15px;
   background-color: ${props => props.theme.button};
   border-radius: 5px;
   align-items: center;
@@ -31,6 +31,13 @@ export const ButtonText = styled.Text`
   font-size: 18px;
   font-weight: bold;
 `;
+
+export const TextPerfil = styled.Text`
+  color:${props => props.theme.text};
+  margin:7px;
+  text-align:center;
+  font-size:18px;
+`
 
 
 // cor primária 1 = #419fe3

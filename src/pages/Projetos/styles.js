@@ -1,15 +1,17 @@
 import styled from 'styled-components/native';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const Title = styled.Text`
 
 font-size: 36px;
-  color: #3a3a3a;
+  color: ${props => props.theme.text};
     
 `;
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
+  background-color: ${props => props.theme.background};
 `;
 
 export const ProjetoList = styled.View`
@@ -18,7 +20,6 @@ export const ProjetoList = styled.View`
 `;
 
 export const Task = styled.View`
-  background-color: #fff;
   margin-bottom: 10px;
   border-radius: 5px;
   padding: 10px 20px;
@@ -27,7 +28,6 @@ export const Task = styled.View`
 `;
 
 export const AddTask = styled.View`
-  background-color: #0071b0;
   margin-bottom: 10px;
   border-radius: 5px;
   padding: 10px 20px;
@@ -36,49 +36,27 @@ export const AddTask = styled.View`
 
 export const TaskText = styled.Text`
   font-size: 18px;
-  color: #3a3a3a;
+  color: ${props => props.theme.text};
 `;
 
-export const AddTaskText = styled.Text`
-  font-size: 18px;
-  color: white;
-`;
 
 export const TaskAction = styled.View`
   flex-direction: row;
 `;
 
-
-
-export const Input = styled.TextInput`
-  flex: 1;
-  height: 40px;
-  background-color: #fff;
-  padding: 0 20px;
-  border-radius: 5px;
+export const IconActions = styled(MaterialCommunityIcons)`
+  color: ${props => props.theme.text};
 `;
 
-export const Button = styled.TouchableOpacity`
-  width: 100px;
-  height: 40px;
-  background-color: #0071b0;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  flex-direction: row;
+export const IconActionsProject = styled(MaterialCommunityIcons)`
+  color: ${props => props.theme.button};
 `;
 
-export const ButtonText = styled.Text`
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
+export const Roll = styled.ScrollView`
+  background-color: ${props => props.theme.background};
 `;
 
-export const FormAddNewProjeto = styled.View`
-  flex-direction: row;
-  margin-top: 30px;
-`;
+
 
 // cor primária 1 = #419fe3
 // cor primária 2 = #7cd0ff

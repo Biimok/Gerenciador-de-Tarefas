@@ -1,19 +1,29 @@
 import styled from 'styled-components/native';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const Title = styled.Text`
   font-size: 36px;
-  color: #3a3a3a;
+  color: ${props => props.theme.text};
+`;
+
+export const Roll = styled.ScrollView`
+  background-color:${props => props.theme.background};
 `;
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
+  background-color:${props => props.theme.background};
+`;
+
+export const Header = styled.View`
+  flex:1;
 `;
 
 export const Input = styled.TextInput`
   flex: 1;
   height: 40px;
-  background-color: #fff;
+  background-color: ${props => props.theme.input};
   padding: 0 20px;
   border-radius: 5px;
 `;
@@ -21,7 +31,7 @@ export const Input = styled.TextInput`
 export const Button = styled.TouchableOpacity`
   width: 80px;
   height: 40px;
-  background-color: #0071b0;
+  background-color: ${props => props.theme.button};
   border-radius: 5px;
   align-items: center;
   justify-content: center;
@@ -29,15 +39,11 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  color: #fff;
+  color: ${props => props.theme.text};
   font-size: 18px;
   font-weight: bold;
 `;
 
-export const FormAddNewTask = styled.View`
-  flex-direction: row;
-  margin-top: 30px;
-`;
 
 export const ProjetoList = styled.View`
   flex: 1;
@@ -45,7 +51,7 @@ export const ProjetoList = styled.View`
 `;
 
 export const Task = styled.View`
-  background-color: #fff;
+  background-color: ${props => props.theme.backgroundTerciary};
   margin-bottom: 10px;
   border-radius: 5px;
   padding: 10px 20px;
@@ -55,7 +61,7 @@ export const Task = styled.View`
 
 export const TaskText = styled.Text`
   font-size: 18px;
-  color: #3a3a3a;
+  color: ${props => props.theme.text};
 `;
 
 export const TaskAction = styled.View`
@@ -68,3 +74,6 @@ export const ErroMessage = styled.Text`
   margin-top: 5px;
 `;
 
+export const IconActions = styled(MaterialCommunityIcons)`
+  color: ${props => props.theme.text};
+`

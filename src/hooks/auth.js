@@ -32,11 +32,9 @@ const AuthProvider = ({ children }) => {
     console.log("usuarios", response);
 
     const user = response.data.filter(data => {
-      console.log("data", data.email, email);
+      console.log("data", data.email, email, data.password, password);
       return (data.email === email && data.password === password);
     });
-
-    console.log("user", user);
 
     if(user.length > 0){
       await AsyncStorage.setItem('@TODO:user', JSON.stringify(user[0]));
@@ -52,9 +50,20 @@ const AuthProvider = ({ children }) => {
     setData({});
   }, []);
 
+  const updateUser = useCallback(async( params ) => {
+    try{
+      console.log(params);
+      await api.put(`usuarios/${data.user.id}`, params);
+      await AsyncStorage.setItem('@TODO:user', JSON.stringify(params));
+    setData({user: params })
+     } catch {
+      console.log("erro ao atualizar perfil");
+     }
+  })
+
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut}}
+      value={{ user: data.user, signIn, signOut, updateUser}}
     >
       {children}
     </AuthContext.Provider>

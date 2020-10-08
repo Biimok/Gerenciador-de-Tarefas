@@ -1,10 +1,10 @@
 {
   "usuarios": [
     {
+      "nome": "Diego Leite",
+      "email": "diego@hotmail.com",
+      "password": "123321",
       "id": 1,
-      "email": "diego@domob.me",
-      "password": "123123",
-      "nome": "Diego",
       "admim": true
     },
     {
@@ -52,25 +52,18 @@
   ],
   "tarefas": [
     {
-      "descricao": "Aprender Java",
-      "concluido": true,
-      "projetoId": 3,
-      "usuarioId": 2,
-      "id": 6
-    },
-    {
       "descricao": "Estudar React",
       "usuarioId": 1,
       "projetoId": 1,
-      "concluido": false,
-      "id": 7
+      "id": 7,
+      "concluido": false
     },
     {
       "descricao": "Aprender JS",
       "usuarioId": 1,
       "projetoId": 3,
-      "concluido": false,
-      "id": 8
+      "id": 8,
+      "concluido": true
     }
   ]
 }
