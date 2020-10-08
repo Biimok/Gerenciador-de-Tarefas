@@ -9,7 +9,7 @@ import { useAuth } from '../hooks/auth';
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
-  const { user} = useAuth();
+  const { user } = useAuth();
 
   return (
     <Stack.Navigator screenOptions={{

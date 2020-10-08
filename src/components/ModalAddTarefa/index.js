@@ -71,6 +71,7 @@ const TarefaModal = ({setTarefas, idProjeto}) => {
       await api.post("tarefas", params);
       loadTarefas();
       setNovaTarefa("");
+      setNovoUsuario("");
       setModalVisible(false);
     } catch (error) {
       console.log("erro ao adicionar tarefa!");

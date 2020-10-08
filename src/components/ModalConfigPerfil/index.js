@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState} from "react";
 
 import { Modal } from "react-native";
 import { useAuth } from '../../hooks/auth';
-import { useNavigation } from '@react-navigation/native';
 
 
 import {
@@ -18,11 +17,8 @@ import {
 
 import { View } from "react-native";
 
-import api from "../../services/api";
-
 const TarefaModal = () => {
   const { user, updateUser } = useAuth();
-  const navigation  = useNavigation();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [nome, setNome] = useState("");
@@ -41,10 +37,14 @@ const TarefaModal = () => {
     email: email,
     password: senha,
     id: user.id,
-    admim: user.admim
+    admim: user.admim,
+    theme: user.theme
   }
 
   updateUser(params);
+  setNome('');
+  setEmail('');
+  setSenha('');
 }
 
   return (

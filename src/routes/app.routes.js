@@ -2,6 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ThemeProvider } from 'styled-components';
+import { DefaultTheme, DarkTheme } from '../components/Theme/Theme';
+import { useAuth } from '../hooks/auth';
 
 import Tarefas from '../pages/Tarefas';
 import Projetos from '../pages/Projetos';
@@ -13,12 +16,13 @@ const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const HomeTabs = () => {
+  const { user } = useAuth();
   return (
     <Tab.Navigator
       initialRouteName="Tarefas"
       activeColor="#f0edf6"
       inactiveColor="#aaa"
-      barStyle={{ backgroundColor: '#3c30af' }}
+      barStyle={{ backgroundColor: user.theme === "DarkTheme" ? "#3c30af" : "#0071b0" }}
       
     >
       <Tab.Screen 
@@ -46,16 +50,29 @@ const HomeTabs = () => {
 }
 
 const AppRoutes = () => {
+    const { user } = useAuth();
     return (
-      <Stack.Navigator 
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false
+      <ThemeProvider theme={() => 
+        {if (user) {
+          if (user.theme === "DarkTheme") {
+            return DarkTheme
+          }
+          return DefaultTheme
+        } else {
+          console.log(user);
+          return DefaultTheme
         }}
-      >
-        <Stack.Screen name="Home" component={HomeTabs} />
-        <Stack.Screen name="Perfil" component={Perfil} />
-      </Stack.Navigator>
+      }>
+        <Stack.Navigator 
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen name="Home" component={HomeTabs} />
+          <Stack.Screen name="Perfil" component={Perfil} />
+        </Stack.Navigator>
+      </ThemeProvider>
     )
   }
 
