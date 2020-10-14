@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
-import {Image, ActivityIndicator} from 'react-native';
-import { useAuth } from '../../hooks/auth';
+import React, { useState } from "react";
+import { Image, ActivityIndicator } from "react-native";
+import { useAuth } from "../../hooks/auth";
 
-import logoImg from '../../assets/LogoTodo.png';
+import logoImg from "../../assets/LogoTodo.png";
 
-import { Container, Input, Button, ButtonText } from './styles';
+import { Container, Input, Button, ButtonText } from "./styles";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -14,9 +14,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   async function handleSubmit() {
-    if(!email) return;
-    if(!password) return;
-    
+    if (!email) return;
+    if (!password) return;
+
     setLoading(true);
 
     console.log("submit", email, password);
@@ -26,11 +26,9 @@ const Login = () => {
         email: email,
         password: password,
       });
-
     } catch (error) {
       console.log(error);
       console.log("Usuário ou senha inválidos.");
-
     } finally {
       setLoading(false);
     }
@@ -38,31 +36,30 @@ const Login = () => {
 
   return (
     <Container>
-      <Image source={logoImg} style={{marginBottom:50}}/>
+      <Image source={logoImg} style={{ marginBottom: 50 }} />
 
-      <Input 
+      <Input
         value={email}
-        onChangeText={text => setEmail(text)}
+        onChangeText={(text) => setEmail(text)}
         placeholder="E-mail"
-      /> 
+      />
 
-      <Input 
+      <Input
         value={password}
-        onChangeText={text => setPassword(text)}
+        onChangeText={(text) => setPassword(text)}
         placeholder="Senha"
         secureTextEntry={true}
       />
 
-      <Button onPress={() => handleSubmit()} >
-        { loading ? (
+      <Button onPress={() => handleSubmit()}>
+        {loading ? (
           <ActivityIndicator color="#fff" />
-        ):(
+        ) : (
           <ButtonText>Acessar</ButtonText>
         )}
       </Button>
-
     </Container>
-  )
-}
+  );
+};
 
 export default Login;

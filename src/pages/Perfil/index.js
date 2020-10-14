@@ -1,23 +1,29 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Image, Switch, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from "react";
+import { Image, Switch, View } from "react-native";
 
-import { Container, Button, ButtonText, TextPerfil, Actions, TextContainer } from './styles';
-import logoImg from '../../assets/LogoTodo.png';
-import { useAuth } from '../../hooks/auth';
-import { useNavigation } from '@react-navigation/native';
-import Modal from '../../components/ModalConfigPerfil';
+import {
+  Container,
+  Button,
+  ButtonText,
+  TextPerfil,
+  Actions,
+  TextContainer,
+} from "./styles";
+import logoImg from "../../assets/LogoTodo.png";
+import { useAuth } from "../../hooks/auth";
+import { useNavigation } from "@react-navigation/native";
+import Modal from "../../components/ModalConfigPerfil";
 
 const Perfil = () => {
-
   const { user, updateUser } = useAuth();
-  const navigation  = useNavigation();
+  const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
   const [cor, setCor] = useState(user.theme);
   const toggleSwitch = () => {
     if (cor === "DarkTheme") {
-      setCor("DefaultTheme")
+      setCor("DefaultTheme");
     } else {
-      setCor("DarkTheme")
+      setCor("DarkTheme");
     }
   };
   const checarTema = () => {
@@ -26,50 +32,38 @@ const Perfil = () => {
     } else {
       setIsEnabled(false);
     }
-  }
+  };
 
   useEffect(() => {
     atualizar();
     checarTema();
-  }, [cor])
-  
+  }, [cor]);
+
   const atualizar = useCallback(() => {
-      
     const params = {
       nome: user.nome,
       email: user.email,
       password: user.password,
       id: user.id,
       admim: user.admim,
-      theme: cor
+      theme: cor,
+    };
 
-    }
-  
     updateUser(params);
-  }, [cor]) ;
+  }, [cor]);
 
   return (
     <Container>
-      <Image source={logoImg} style={{marginBottom:50}}/>
+      <Image source={logoImg} style={{ marginBottom: 50 }} />
       <TextContainer>
-        <TextPerfil>
-          Nome: {user.nome}
-        </TextPerfil>
+        <TextPerfil>Nome: {user.nome}</TextPerfil>
+
+        <TextPerfil>Email: {user.email}</TextPerfil>
 
         <TextPerfil>
-          Email: {user.email}
+          Função: {user.admim ? "Administrador" : "Usuário"}
         </TextPerfil>
-
-        <TextPerfil>
-          Função: {
-              user.admim ? (
-                "Administrador"
-              ) : (
-                "Usuário"
-              )
-            }
-        </TextPerfil>
-        <View >
+        <View>
           <Switch
             trackColor={{ false: "#3c3c3c", true: "#fff" }}
             thumbColor={isEnabled ? "#3c30af" : "#0071b0"}
@@ -78,16 +72,14 @@ const Perfil = () => {
           />
         </View>
       </TextContainer>
-      <Actions>      
-        <Button onPress={() => navigation.navigate('Tarefas')} >
-      
-            <ButtonText>Voltar</ButtonText>
-      
+      <Actions>
+        <Button onPress={() => navigation.navigate("Tarefas")}>
+          <ButtonText>Voltar</ButtonText>
         </Button>
-        <Modal/>
+        <Modal />
       </Actions>
     </Container>
-  )
-}
+  );
+};
 
 export default Perfil;

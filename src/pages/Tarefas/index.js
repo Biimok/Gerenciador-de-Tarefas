@@ -18,7 +18,7 @@ import {
   ProjetoList,
   Header,
   Roll,
-  IconActions
+  IconActions,
 } from "./styles";
 
 const Tarefas = () => {
@@ -57,36 +57,32 @@ const Tarefas = () => {
 
   useEffect(() => {
     // if (tarefas.length > 0) {
-      loadProjetos();
+    loadProjetos();
     // }
   }, [tarefas]);
 
-  const attTarefa = useCallback(
-    async (tarefa) => {
-      const params = {
-        ...tarefa,
-        concluido: !tarefa.concluido,
-      };
+  const attTarefa = useCallback(async (tarefa) => {
+    const params = {
+      ...tarefa,
+      concluido: !tarefa.concluido,
+    };
 
-      await api.put(`tarefas/${tarefa.id}`, params);
+    await api.put(`tarefas/${tarefa.id}`, params);
 
-      loadTarefas();
-    },
-    []
-  );
+    loadTarefas();
+  }, []);
 
   return (
     <>
       <Roll>
-        
-        <ModalBoasVindas tarefas={tarefas}/>
-        
+        <ModalBoasVindas tarefas={tarefas} />
+
         <Container>
-          <View style={{flexDirection:"row"}}>
+          <View style={{ flexDirection: "row" }}>
             <Header>
               <Title>{`${user.nome}, suas Tarefas`}</Title>
             </Header>
-            <ModalConfig/>
+            <ModalConfig />
           </View>
           {!!errorMessage && <ErroMessage>{errorMessage}</ErroMessage>}
 

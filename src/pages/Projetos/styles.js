@@ -1,17 +1,15 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const Title = styled.Text`
-
-font-size: 36px;
-  color: ${props => props.theme.text};
-    
+  font-size: 36px;
+  color: ${(props) => props.theme.text};
 `;
 
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: ${props => props.theme.background};
+  background-color: ${(props) => props.theme.background};
 `;
 
 export const ProjetoList = styled.View`
@@ -36,27 +34,24 @@ export const AddTask = styled.View`
 
 export const TaskText = styled.Text`
   font-size: 18px;
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
 `;
-
 
 export const TaskAction = styled.View`
   flex-direction: row;
 `;
 
 export const IconActions = styled(MaterialCommunityIcons)`
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
 `;
 
 export const IconActionsProject = styled(MaterialCommunityIcons)`
-  color: ${props => props.theme.button};
+  color: ${(props) => props.theme.button};
 `;
 
 export const Roll = styled.ScrollView`
-  background-color: ${props => props.theme.background};
+  background-color: ${(props) => props.theme.background};
 `;
-
-
 
 // cor primária 1 = #419fe3
 // cor primária 2 = #7cd0ff

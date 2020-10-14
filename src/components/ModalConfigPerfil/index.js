@@ -1,8 +1,7 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 import { Modal } from "react-native";
-import { useAuth } from '../../hooks/auth';
-
+import { useAuth } from "../../hooks/auth";
 
 import {
   Wrap,
@@ -12,7 +11,7 @@ import {
   Input,
   Actions,
   ErrorMessage,
-  CreateButton
+  CreateButton,
 } from "./styles";
 
 import { View } from "react-native";
@@ -25,34 +24,34 @@ const TarefaModal = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  
- const atualizar = () => {
-  if (nome === "" || senha === "" || email === "") {
-    setErrorMessage("Preencha todos os campos");
-    return;
-  }
 
-  const params = {
-    nome: nome,
-    email: email,
-    password: senha,
-    id: user.id,
-    admim: user.admim,
-    theme: user.theme
-  }
+  const atualizar = () => {
+    if (nome === "" || senha === "" || email === "") {
+      setErrorMessage("Preencha todos os campos");
+      return;
+    }
 
-  updateUser(params);
-  setNome('');
-  setEmail('');
-  setSenha('');
-}
+    const params = {
+      nome: nome,
+      email: email,
+      password: senha,
+      id: user.id,
+      admim: user.admim,
+      theme: user.theme,
+    };
+
+    updateUser(params);
+    setNome("");
+    setEmail("");
+    setSenha("");
+  };
 
   return (
     <View>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <Wrap>
-        <TextModal>Atualize suas Informações</TextModal>
-          
+          <TextModal>Atualize suas Informações</TextModal>
+
           <Input
             value={nome}
             onChangeText={(text) => setNome(text)}
@@ -70,27 +69,26 @@ const TarefaModal = () => {
             onChangeText={(text) => setSenha(text)}
             placeholder="Digite a senha..."
           />
-          
-          { !!errorMessage && (
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-           )}
-        
-        <Actions>
-          <TouchableHighlight
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <TextButton>Cancelar</TextButton>
-          </TouchableHighlight>
-          <TouchableHighlight 
-            onPress={() => {
-              atualizar();
-              setModalVisible(false);
-            }}>
-            <TextButton>Atualizar</TextButton>
-          </TouchableHighlight>
-        </Actions>
+
+          {!!errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
+          <Actions>
+            <TouchableHighlight
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <TextButton>Cancelar</TextButton>
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                atualizar();
+                setModalVisible(false);
+              }}
+            >
+              <TextButton>Atualizar</TextButton>
+            </TouchableHighlight>
+          </Actions>
         </Wrap>
       </Modal>
       <CreateButton

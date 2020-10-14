@@ -1,14 +1,14 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { ThemeProvider } from 'styled-components';
-import { DefaultTheme, DarkTheme } from '../components/Theme/Theme';
-import { useAuth } from '../hooks/auth';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ThemeProvider } from "styled-components";
+import { DefaultTheme, DarkTheme } from "../components/Theme/Theme";
+import { useAuth } from "../hooks/auth";
 
-import Tarefas from '../pages/Tarefas';
-import Projetos from '../pages/Projetos';
-import Perfil from '../pages/Perfil';
+import Tarefas from "../pages/Tarefas";
+import Projetos from "../pages/Projetos";
+import Perfil from "../pages/Perfil";
 
 const Tab = createMaterialBottomTabNavigator();
 // const StackTarefas = createStackNavigator();
@@ -22,68 +22,77 @@ const HomeTabs = () => {
       initialRouteName="Tarefas"
       activeColor="#f0edf6"
       inactiveColor="#aaa"
-      barStyle={{ backgroundColor: user.theme === "DarkTheme" ? "#3c30af" : "#0071b0" }}
-      
+      barStyle={{
+        backgroundColor: user.theme === "DarkTheme" ? "#3c30af" : "#0071b0",
+      }}
     >
-      <Tab.Screen 
-            name="Tarefas"
-            component={Tarefas}
-            options={{
-              tabBarLabel:'Tarefas',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="view-dashboard" color="#fff" size={30} />
-              ),
-            }}
-          />
-          <Tab.Screen 
-            name="Projetos" 
-            component={Projetos} 
-            options={{
-              tabBarLabel:'Projetos',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="playlist-edit" color="#fff" size={30} />
-              ),
-            }}
-          />
+      <Tab.Screen
+        name="Tarefas"
+        component={Tarefas}
+        options={{
+          tabBarLabel: "Tarefas",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="view-dashboard"
+              color="#fff"
+              size={30}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Projetos"
+        component={Projetos}
+        options={{
+          tabBarLabel: "Projetos",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="playlist-edit"
+              color="#fff"
+              size={30}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 const AppRoutes = () => {
-    const { user } = useAuth();
-    return (
-      <ThemeProvider theme={() => 
-        {if (user) {
+  const { user } = useAuth();
+  return (
+    <ThemeProvider
+      theme={() => {
+        if (user) {
           if (user.theme === "DarkTheme") {
-            return DarkTheme
+            return DarkTheme;
           }
-          return DefaultTheme
+          return DefaultTheme;
         } else {
           console.log(user);
-          return DefaultTheme
+          return DefaultTheme;
+        }
+      }}
+    >
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
         }}
-      }>
-        <Stack.Navigator 
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false
-          }}
-        >
-          <Stack.Screen name="Home" component={HomeTabs} />
-          <Stack.Screen name="Perfil" component={Perfil} />
-        </Stack.Navigator>
-      </ThemeProvider>
-    )
-  }
+      >
+        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="Perfil" component={Perfil} />
+      </Stack.Navigator>
+    </ThemeProvider>
+  );
+};
 
 export default AppRoutes;
 
-
-
 // const TarefasRoutes = () => {
 //   return (
-//     <StackTarefas.Navigator 
-//       initialRouteName="Tarefas" 
+//     <StackTarefas.Navigator
+//       initialRouteName="Tarefas"
 //       screenOptions={{
 //         headerShown: false
 //       }}
@@ -96,15 +105,15 @@ export default AppRoutes;
 
 // const ProjetosRoutes = () => {
 //   return (
-//     <StackProjetos.Navigator 
+//     <StackProjetos.Navigator
 //       initialRouteName="Projetos"
 //       screenOptions={{
 //         headerShown: false
 //       }}
 //     >
 //       <StackProjetos.Screen name="Projetos" component={Projetos}/>
-//       <StackProjetos.Screen 
-//         name="Perfil" 
+//       <StackProjetos.Screen
+//         name="Perfil"
 //         component={Perfil}
 //       />
 //     </StackProjetos.Navigator>
@@ -117,10 +126,10 @@ export default AppRoutes;
 //       <Tab.Navigator
 //         initialRouteName="TarefasRoutes"
 //       >
-        
-//         <Tab.Screen 
+
+//         <Tab.Screen
 //           name="TarefasRoutes"
-//           component={TarefasRoutes} 
+//           component={TarefasRoutes}
 //           options={{
 //             tabBarLabel:'Tarefas',
 //             tabBarIcon: ({ color }) => (
@@ -128,9 +137,9 @@ export default AppRoutes;
 //             ),
 //           }}
 //         />
-//         <Tab.Screen 
-//           name="Projetos" 
-//           component={ProjetosRoutes} 
+//         <Tab.Screen
+//           name="Projetos"
+//           component={ProjetosRoutes}
 //           options={{
 //             tabBarLabel:'Projetos',
 //             tabBarIcon: ({ color }) => (
